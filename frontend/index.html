@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zennterior – Calm & Classy Interiors</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Raleway:wght@500;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+     background-color: #eaeaea;
+     color: #333;               
+     font-family: 'Poppins', sans-serif;
+     font-weight: 300;
+     line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .navbar-brand {
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+   }
+
+    h1, h2, h3, .navbar-brand {
+        font-family: 'Poppins', serif;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+    }
+
+    .section-heading {
+       font-family: 'Poppins', sans-serif;
+       font-weight: 700;
+       text-transform: uppercase;
+       letter-spacing: 1px;
+    }
+
+    .navbar {
+      background-color: rgba(209, 204, 203, 0.9);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      position: relative;
+    }
+
+    .hero {
+      background:url('assets/hero-bg.jpg') no-repeat center center/cover;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #252525;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: #ccc9c9;
+    }
+
+    .dark-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1030;
+    }
+
+    .product-preview img {
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-preview img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    section {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    .fade-in {
+      animation: fadeIn 1.2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-outline-dark:hover {
+      background-color: #212020;
+    }
+
+    .section-heading {
+      margin-bottom: 2rem;
+      font-weight: 900;
+    }
+
+    footer {
+      font-size: 0.95rem;
+    }
+
+    .btn-dark, .btn-outline-dark {
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.btn-dark:hover, .btn-outline-dark:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Dark Mode Toggle -->
+  <div class="dark-toggle">
+    <button class="btn btn-outline-secondary" id="theme-toggle">
+      <i class="bi bi-moon-stars-fill"></i>
+    </button>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">Zennterior</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link fw-semibold" href="products.html">Products</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="login.html">Login</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="register.html">Register</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="profile.html">Profile</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero fade-in">
+    <div>
+      <h1>Welcome to Zennterior</h1>
+      <p>Calm & Classy Interiors to Elevate Your Space</p>
+      <a href="products.html" class="btn btn-dark mt-3 px-4 py-2">Explore Products</a>
+    </div>
+  </section>
+
+  <!-- About Us -->
+  <section class="container fade-in text-center">
+    <h2 class="section-heading">About Zennterior</h2>
+    <p class="lead">At Zennterior, we blend modern aesthetics with timeless peace. Our handpicked pieces infuse calmness into your everyday living spaces.</p>
+  </section>
+
+  <!-- Room Inspirations -->
+  <section class="container fade-in text-center">
+    <h2 class="section-heading">Room Inspirations</h2>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <img src="assets/livingroom.jpg" class="img-fluid rounded shadow-sm fw-semibold" style="max-width: 100%; height: auto; border-radius: 20px;" alt="Minimal Living Room">
+        <p class="mt-2 fs-5 fw-medium">Minimal Living Room – Nature Meets Calm</p>
+      </div>
+      <div class="col-md-6">
+        <img src="assets/workspace.jpg" class="img-fluid rounded shadow-sm fw-semibold" style="max-width: 100%; height: auto; border-radius: 20px;" alt="Zen Workspace">
+        <p class="mt-2 fs-5 fw-medium">Zen Workspace – Balanced & Focused</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="container fade-in">
+    <h2 class="text-center section-heading">Featured Products</h2>
+    <div class="row g-4 product-preview">
+      <div class="col-md-3 col-6">
+        <img src="assets/lamp1.jpg" class="img-fluid" alt="Lamp">
+        <p class="text-center mt-2">Zen Lamp – ₹1299</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <img src="assets/vase1.jpg" class="img-fluid" alt="Vase">
+        <p class="text-center mt-2">Clay Vase – ₹799</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <img src="assets/wall art1.jpg" class="img-fluid" alt="Wall Art">
+        <p class="text-center mt-2">Abstract Wall Decor – ₹1499</p>
+      </div>
+      <div class="col-md-3 col-6">
+        <img src="assets/table decor.jpg" class="img-fluid" alt="Table Decor">
+        <p class="text-center mt-2">Table Decor – ₹999</p>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <a href="products.html" class="btn btn-outline-dark px-4 py-2">View All Products</a>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="container text-center fade-in">
+    <h2 class="section-heading">Why Choose Zennterior?</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <i class="bi bi-droplet-half fs-2 mb-2 text-primary"></i>
+        <h5>Peaceful Aesthetics</h5>
+        <p>Every piece is selected to cultivate a sense of harmony and calm.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-box-seam fs-2 mb-2 text-primary"></i>
+        <h5>Quality Craftsmanship</h5>
+        <p>Made with love, using natural materials and sustainable design.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-stars fs-2 mb-2 text-primary"></i>
+        <h5>Timeless Style</h5>
+        <p>Minimal, elegant pieces that never go out of style.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-body-tertiary border-top fade-in mt-5">
+    <div class="container p-4">
+      <div class="row text-center text-md-start">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <h5 class="fw-bold">Zennterior</h5>
+          <p>Transforming homes into havens with thoughtfully curated interior accessories.</p>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4">
+          <h6>Links</h6>
+          <ul class="list-unstyled">
+            <li><a href="index.html" class="text-decoration-none">Home</a></li>
+            <li><a href="products.html" class="text-decoration-none">Products</a></li>
+            <li><a href="login.html" class="text-decoration-none">Login</a></li>
+            <li><a href="register.html" class="text-decoration-none">Register</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h6>Contact</h6>
+          <p>Email: hello@zennterior.com</p>
+          <p>Phone: +91 98765 43210</p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h6>Follow Us</h6>
+          <a href="#" class="me-3 text-reset"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="me-3 text-reset"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="me-3 text-reset"><i class="bi bi-twitter-x"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center p-3 bg-body-secondary border-top">
+      © 2025 Zennterior. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Bootstrap Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    toggle.addEventListener('click', () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-bs-theme', newTheme);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zennterior – Products</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f4f4f4;
+      --text: #000000;
+      --card: #ffffff;
+    }
+
+    body.dark-mode {
+      --bg: #121212;
+      --text: #ffffff;
+      --card: #1e1e1e;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      transition: 0.3s ease;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      z-index: 1000;
+    }
+
+    /* 🔹 NAVBAR STYLING */
+    .navbar {
+      background-color: var(--bg) !important;
+      font-size: large;
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .nav-link, .navbar-brand {
+      color: var(--text) !important;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: #5e4b8b !important;
+    }
+
+    .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    /* 🔹 PRODUCT CARD */
+    .product-card {
+      background-color: var(--card);
+      border: none;
+      border-radius: 12px;
+      padding: 15px;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .product-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: 0.3s ease;
+    }
+
+    .product-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 0.75rem;
+    }
+
+    .product-price {
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .btn-add {
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+
+    .form-control, .form-select {
+      background-color: var(--card);
+      color: var(--text);
+      border: 1px solid #b7b7b7;
+    }
+
+    .form-control::placeholder {
+      color: #888;
+    }
+
+    @media (max-width: 576px) {
+      .product-img {
+        height: 150px;
+      }
+    }
+   
+   .modal-content {
+  background-color: var(--bs-body-bg);
+  transition: all 0.3s ease-in-out;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+}
+
+.modal-title {
+  font-family: 'Segoe UI', sans-serif;
+  letter-spacing: 0.5px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-style: oblique;
+  color: var(--heading, #333);
+}
+
+#productModal .modal-body p,
+#productModal .modal-body ul {
+  font-size: 15px;
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--text, #555);
+}
+
+#productModal .modal-body ul {
+  padding-left: 18px;
+  list-style-type: circle;
+}
+
+#addToCartBtn {
+  font-weight: 600;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #5aafa0; /* Muted Teal */
+  border-color: #499387;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  transition: all 0.25s ease-in-out;
+}
+
+#addToCartBtn:hover {
+  background-color: #499387;
+  transform: scale(1.04);
+  box-shadow: 0 4px 10px rgba(90, 175, 160, 0.3);
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- 🌗 Theme Toggle -->
+  <div class="theme-toggle">
+    <button class="btn btn-outline-dark btn-sm" onclick="toggleTheme()">🌙/☀️</button>
+  </div>
+
+  <!-- 🧭 Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Zennterior</a>
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
+          <li class="nav-item"><a class="nav-link" href="order-history.html">Orders</a></li>
+          <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 🔍 Search & Sort -->
+  <div class="container my-4">
+    <div class="row g-3 align-items-center">
+      <div class="col-md-8">
+        <input type="text" class="form-control" placeholder="Search products..." />
+      </div>
+      <div class="col-md-4">
+        <select class="form-select">
+          <option>Sort by Price: Low to High</option>
+          <option>Sort by Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🛒 Product Grid -->
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- Example product -->
+      <div class="col-md-3 col-sm-6">
+        <div class="product-card">
+          <img src="assets/chair.jpg" class="product-img" alt="Elegant Chair" />
+          <div class="product-name">Elegant Chair</div>
+          <div class="product-price">₹1200 • <span class="text-success">In Stock</span></div>
+         <button class="btn btn-secondary btn-sm mt-2"  onclick="showDetails(
+         'Elegant Chair',
+         '₹1200',
+         'Ergonomic and stylish chair ideal for modern interiors.',
+         '4.0',
+         ['Wooden finish', 'Soft cushion', 'Compact design'],
+         'assets/chair.jpg',
+         '1'
+        )">View Details</button>
+        </div>
+      </div>
+
+      <!-- Repeat for each product -->
+      <div class="col-md-3 col-sm-6">
+        <div class="product-card">
+          <img src="assets/light.jpg" class="product-img" alt="Ambient Lamp" />
+          <div class="product-name">Ambient Lamp</div>
+          <div class="product-price">₹950 • <span class="text-success">In Stock</span></div>
+          <button class="btn btn-secondary btn-sm mt-2"  onclick="showDetails(
+          'Ambient Lamp',
+          '₹950',
+          'Warm lighting lamp for cozy ambiance.',
+          '4.2',
+          ['LED bulb included', 'Adjustable neck', 'Modern look'],
+          'assets/light.jpg',
+           '2'
+          )">View Details</button>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="product-card">
+          <img src="assets/sofa1.jpg" class="product-img" alt="Soft Sofa" />
+          <div class="product-name">Soft Sofa</div>
+          <div class="product-price">₹6800 • <span class="text-success">In Stock</span></div>
+          <button class="btn btn-secondary btn-sm mt-2"  onclick="showDetails(
+  'Soft Sofa',
+  '₹6800',
+  'A sleek modern sofa with soft cushioning and wooden frame.',
+  '4.3',
+  ['Comfortable seating', 'Premium fabric', '1-year warranty'],
+  'assets/sofa1.jpg',
+  '3'
+)">View Details</button>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="product-card">
+          <img src="assets/table1.jpg" class="product-img" alt="Wooden Table" />
+          <div class="product-name">Wooden Table</div>
+          <div class="product-price">₹2500 • <span class="text-muted">Out of Stock</span></div>
+          <button class="btn btn-secondary btn-sm mt-2" disabled>Out of Stock</button>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="product-card">
+          <img src="assets/bed.jpg" class="product-img" alt="Queen Bed" />
+          <div class="product-name">Queen Bed</div>
+          <div class="product-price">₹12,000 • <span class="text-success">In Stock</span></div>
+          <button class="btn btn-secondary btn-sm mt-2"  onclick="showDetails(
+  'Queen Bed',
+  '₹12,000',
+  'King size luxury bed with cushioned headboard.',
+  '4.7',
+  ['Soft mattress', 'Storage compartments', 'Premium wood'],
+  'assets/bed.jpg',
+  '4'
+)">View Details</button>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="product-card">
+          <img src="assets/carpet.jpg" class="product-img" alt="Classic Carpet" />
+          <div class="product-name">Classic Carpet</div>
+          <div class="product-price">₹2300 • <span class="text-success">In Stock</span></div>
+          <button class="btn btn-secondary btn-sm mt-2"  onclick="showDetails(
+  'Classic Carpet',
+  '₹2300',
+  'Elegant Persian-style carpet for living rooms.',
+  '4.3',
+  ['Dust-proof', 'Fade-resistant', 'Premium wool'],
+  'assets/carpet.jpg',
+  '5'
+)">View Details</button>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="product-card">
+          <img src="assets/shelf.jpg" class="product-img" alt="Floating Shelf" />
+          <div class="product-name">Floating Shelf</div>
+          <div class="product-price">₹799 • <span class="text-success">In Stock</span></div>
+          <button class="btn btn-secondary btn-sm mt-2"  onclick="showDetails(
+  'Floating Shelf',
+  '₹799',
+  'Minimalist wooden shelf for wall display.',
+  '4.1',
+  ['Easy to mount', 'Sturdy build', 'Compact design'],
+  'assets/shelf.jpg',
+  '6'
+)">View Details</button>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="product-card">
+          <img src="assets/cabinet.jpg" class="product-img" alt="Storage Cabinet" />
+          <div class="product-name">Storage Cabinet</div>
+          <div class="product-price">₹1999 • <span class="text-success">In Stock</span></div>
+          <button class="btn btn-secondary btn-sm mt-2"  onclick="showDetails(
+  'Storage Cabinet',
+  '₹1999',
+  'Multi-compartment storage for kitchen/bedroom.',
+  '4.4',
+  ['Soft-close drawers', 'Anti-tip safety', 'Compact storage'],
+  'assets/cabinet.jpg',
+  '7'
+)">View Details</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="container my-4">
+    <nav aria-label="Product pagination">
+      <ul class="pagination justify-content-center">
+        <li class="page-item disabled"><a class="page-link" href="#">«</a></li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">»</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("dark-mode");
+    }
+  </script>
+
+  <footer class="bg-body-tertiary text-center text-lg-start mt-5 border-top">
+    <div class="text-center p-3 bg-body-secondary border-top">
+      © 2025 Zennterior. All rights reserved.
+    </div>
+  </footer>
+
+<!-- Product View Modal -->
+<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-0 rounded-4 shadow-lg p-2">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-semibold fs-4 text-primary-emphasis" id="productModalLabel">Product Name</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex flex-column flex-md-row gap-4 px-4 pb-4">
+        <img id="modalProductImg" src="" class="img-fluid rounded-3 shadow-sm" style="max-width: 320px;" alt="Product Image">
+        <div class="flex-grow-1">
+          <p class="mb-2"><strong class="text-secondary">Price:</strong> <span id="modalProductPrice" class="text-dark-emphasis"></span></p>
+          <p class="mb-2"><strong class="text-secondary">Description:</strong> <span id="modalProductDesc" class="text-dark-emphasis"></span></p>
+          <p class="mb-3"><strong class="text-secondary">Rating:</strong> <span id="modalProductRating" class="text-warning-emphasis"></span></p>
+          <p class="mb-1"><strong class="text-secondary">Features:</strong></p>
+          <ul id="modalProductFeatures" class="ps-3 mb-3 text-dark-emphasis small"></ul>
+          <button class="btn btn-success btn-sm px-4 rounded-pill shadow-sm" id="addToCartBtn">
+            <i class="bi bi-cart-plus me-1"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  function showDetails(name, price, description, rating, features, image, id) {
+    document.getElementById('productModalLabel').innerText = name;
+    document.getElementById('modalProductImg').src = image;
+    document.getElementById('modalProductPrice').innerText = price;
+    document.getElementById('modalProductDesc').innerText = description;
+    document.getElementById('modalProductRating').innerText = rating;
+
+    const featureList = document.getElementById('modalProductFeatures');
+    featureList.innerHTML = '';
+    features.forEach(f => {
+      const li = document.createElement('li');
+      li.textContent = f;
+      featureList.appendChild(li);
+    });
+
+    const addToCartBtn = document.getElementById('addToCartBtn');
+addToCartBtn.onclick = () => addToCart(id);
+
+
+    const productModal = new bootstrap.Modal(document.getElementById('productModal'));
+    productModal.show();
+  }
+</script>
+
+<script>
+  function addToCart(productId) {
+    const name = document.getElementById('productModalLabel').innerText;
+    const price = document.getElementById('modalProductPrice').innerText;
+    const image = document.getElementById('modalProductImg').src;
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existingItem = cart.find(item => item.id === productId);
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cart.push({
+        id: productId,
+        name,
+        price,
+        image,
+        quantity: 1
+      });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Product added to cart!");
+  }
+
+  // This function is called when "View Details" is clicked
+  function setModalDetails(id, name, price, image) {
+    document.getElementById('productModalLabel').innerText = name;
+    document.getElementById('modalProductPrice').innerText = price;
+    document.getElementById('modalProductImg').src = image;
+    document.getElementById('addToCartBtn').setAttribute('onclick', `addToCart('${id}')`);
+  }
+</script>
+
+
+</body>
+</html>

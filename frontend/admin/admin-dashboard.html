@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard – Zennterior</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e4ecf6, #f9f9f9);
+      overflow-x: hidden;
+    }
+
+    .dashboard-title {
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+      color: #1a1a1a;
+    }
+
+    .dashboard-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 0 1rem;
+    }
+
+    .dashboard-card {
+      width: 260px;
+      height: 200px;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+      padding: 1.8rem 1rem;
+    }
+
+    .dashboard-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+    }
+
+    .dashboard-card h5 {
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .dashboard-card .display-6 {
+      font-size: 2.4rem;
+      font-weight: bold;
+      color: #111;
+    }
+
+    .dashboard-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .dashboard-card ul li {
+      margin: 4px 0;
+    }
+
+    .action-buttons {
+      margin-top: 3rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+
+    .action-buttons a {
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: 1rem;
+      background-color: #1a1a1a;
+      color: #fff;
+      transition: 0.3s ease;
+      text-decoration: none;
+    }
+
+    .action-buttons a:hover {
+      background-color: #333;
+      transform: scale(1.03);
+    }
+
+    .logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-card {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container-fluid position-relative">
+    <h2 class="dashboard-title">🧭 Admin Dashboard – Zennterior</h2>
+    <button onclick="logout()" class="btn btn-outline-danger logout-btn"><i class="bi bi-box-arrow-right"></i> Logout</button>
+
+    <div class="dashboard-container">
+      <div class="dashboard-card">
+        <h5><i class="bi bi-box-seam me-2"></i>Total Products</h5>
+        <p class="display-6" id="totalProducts">--</p>
+      </div>
+
+      <div class="dashboard-card">
+        <h5><i class="bi bi-people-fill me-2"></i>Total Customers</h5>
+        <p class="display-6" id="totalCustomers">--</p>
+      </div>
+
+      <div class="dashboard-card">
+        <h5><i class="bi bi-truck me-2"></i>Orders by Status</h5>
+        <ul id="orderStatus">
+          <li>Pending: --</li>
+          <li>Processing: --</li>
+          <li>Shipped: --</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <a href="admin-products.html"><i class="bi bi-grid-fill me-2"></i>Manage Products</a>
+      <a href="admin-customers.html"><i class="bi bi-person-lines-fill me-2"></i>Manage Customers</a>
+      <a href="admin-orders.html"><i class="bi bi-bag-fill me-2"></i>Manage Orders</a>
+    </div>
+  </div>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userRole");
+      window.location.href = "../login.html";
+    }
+
+    // Dummy fetch stats (replace with real API calls)
+    document.getElementById("totalProducts").textContent = 120;
+    document.getElementById("totalCustomers").textContent = 310;
+    document.getElementById("orderStatus").innerHTML = `
+      <li>Pending: 12</li>
+      <li>Processing: 7</li>
+      <li>Shipped: 5</li>`;
+  </script>
+
+</body>
+</html>
